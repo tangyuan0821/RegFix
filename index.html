@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>封禁信息整合器</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #5c7cfa;
+        }
+
+        button {
+            background: #5c7cfa;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #4263eb;
+        }
+
+        #result {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            min-height: 80px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        input-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a5568;
+            font-weight: 600;
+            font-size: 14px;
+}
+footer {
+    padding: 20px;
+    border-top: 1px solid #e2e8f0;
+    margin-top: 60px;
+}
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="input-group">
+            <!-- ID标签 -->
+            <label for="info1" class="input-label">填入您的封禁ID（若不知如何获取，可点击此处查看<a  href="https://zh.wikipedia.org/w/index.php?title=%E4%B8%AD%E5%9C%8B&action=edit">此处</a>查看）</label>
+            <input type="text" id="info1" placeholder="请输入封禁ID"/>
+        </div>
+        <div class="input-group">
+            <!-- IP地址标签 -->
+            <label for="info2" class="input-label">您目前使用的IP地址（若不知如何获取，可点击此处查看<a  href="https://zh.wikipedia.org/w/index.php?title=%E4%B8%AD%E5%9C%8B&action=edit">此处</a>查看）</label>
+            <input type="text" id="info2" placeholder="请输入IP地址">
+        </div>
+        <button onclick="generateOutput()">生成描述信息</button>
+        <div id="result"></div>
+    </div>
+</body>
+
+
+    <script>
+        function generateOutput() {
+            const info1 = document.getElementById('info1').value;
+            const info2 = document.getElementById('info2').value;
+            const resultDiv = document.getElementById('result');
+            
+            if (!info1 || !info2) {
+                alert("请填写完整信息！");
+                return;
+            }
+
+            resultDiv.innerHTML = `
+                <p>由於 GFW 的原因，我現在必須使用代理才能訪問中文維基百科，但我的代理被封禁，無法編輯中文維基百科的頁面</p>
+                <p>被封鎖的 IP 地址是「${info2}」，該封鎖 ID 是「${info1}」</p>
+            `;
+            resultDiv.style.display = 'block';
+        }
+    </script>
+  <!-- 新增的footer -->
+    <footer style="text-align: center; color: #718096; margin-top: 40px; font-size: 14px;">
+        <p>本网站旨在帮助用户生成申请IPBE权限所需的部分信息，帮助新用户更快的参与到维基百科之中</p>
+    </footer>
+</body>
+</html>
