@@ -96,7 +96,9 @@ footer {
             <input type="text" id="info2" placeholder="请输入IP地址">
         </div>
         <button onclick="generateOutput()">生成描述信息</button>
-        <div id="result"></div>
+        <div id="result"></div><br><br>
+
+        <button id="copyButton" onclick="copyResult()">复制内容</button>
     </div>
 </body>
 
@@ -118,6 +120,25 @@ footer {
             `;
             resultDiv.style.display = 'block';
         }
+        function copyResult() {
+    const resultDiv = document.getElementById('result');
+    const range = document.createRange();
+    range.selectNodeContents(resultDiv);
+
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    try {
+        document.execCommand('copy');
+        alert('内容已复制到剪贴板！');
+    } catch (err) {
+        alert('复制失败，请手动复制内容。');
+    }
+
+    selection.removeAllRanges();
+}
+
     </script>
     <footer style="text-align: center; color: #718096; margin-top: 40px; font-size: 14px;">
         <p>本网站旨在帮助用户生成申请IPBE权限所需的部分信息，帮助新用户更快的参与到维基百科之中<br>
